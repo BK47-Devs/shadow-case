@@ -1,0 +1,72 @@
+# ---------- Dependencies ----------
+node_modules/
+.pnpm-store/
+.yarn/
+.npm/
+
+# ---------- Build output ----------
+dist/
+build/
+out/
+.vite/
+*.tsbuildinfo
+coverage/
+.turbo/
+
+# ---------- Environment variables / secrets ----------
+# Never commit real secrets. Commit .env.example instead.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ---------- Logs ----------
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ---------- Testing ----------
+playwright-report/
+test-results/
+blob-report/
+playwright/.cache/
+.nyc_output/
+
+# ---------- Prisma ----------
+# Keep prisma/schema.prisma and prisma/migrations/ in git.
+# Local SQLite files (if used for quick tests):
+*.db
+*.db-journal
+server/prisma/*.db
+
+# ---------- Docker ----------
+# Local data volumes (if mounted into the repo)
+pgdata/
+postgres-data/
+docker-compose.override.yml
+
+# ---------- Editors / IDEs ----------
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# ---------- OS files ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------- Misc ----------
+.cache/
+.eslintcache
+.parcel-cache/
+tmp/
+temp/
+*.local
