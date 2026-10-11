@@ -1,0 +1,40 @@
+name: Feature
+description: A new feature or improvement
+title: "feat: "
+labels: ["feat"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - client
+        - server
+        - shared
+        - story engine
+        - CI / tooling
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: What and why?
+      description: What should the feature do, and why do we need it?
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: How do we know it is done?
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes, links or design ideas
+    validations:
+      required: false

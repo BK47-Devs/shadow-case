@@ -1,0 +1,25 @@
+name: Chore, docs or refactor
+description: Tooling, setup, documentation, tests or code cleanup
+title: "chore: "
+labels: ["chore"]
+body:
+  - type: textarea
+    id: task
+    attributes:
+      label: What needs to be done?
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why?
+    validations:
+      required: false
+  - type: textarea
+    id: done
+    attributes:
+      label: Definition of done
+      placeholder: |
+        - [ ] ...
+    validations:
+      required: false

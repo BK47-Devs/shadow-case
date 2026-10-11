@@ -1,0 +1,33 @@
+name: Story content
+description: Write or change story scenes, choices or clues
+title: "story: "
+labels: ["story"]
+body:
+  - type: input
+    id: part
+    attributes:
+      label: Story and part
+      placeholder: "golden-watch / chapter 3"
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: What needs to be written or changed?
+      description: Scenes, branches, endings.
+    validations:
+      required: true
+  - type: textarea
+    id: clues
+    attributes:
+      label: Clues
+      description: Clues granted, and clues required to unlock choices.
+    validations:
+      required: false
+  - type: textarea
+    id: links
+    attributes:
+      label: Links to the story bible or related scenes
+      description: Scene IDs this connects to (format m<part>-<letter>-<short-name>).
+    validations:
+      required: false
