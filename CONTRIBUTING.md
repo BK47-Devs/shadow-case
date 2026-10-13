@@ -19,17 +19,18 @@ Short rules so we can work in one repo without stepping on each other.
 - `<short-description>`: 2 to 4 words, lowercase, hyphens only.
 - No names or initials in branch names. Git records the author, and the issue assignee shows who owns the work.
 
-| Type | Use for | Example |
-|---|---|---|
-| `feat` | new feature | `feat/42-notebook-page` |
-| `fix` | bug fix | `fix/57-clue-unlock-condition` |
-| `docs` | documentation only | `docs/architecture-update` |
-| `refactor` | code change, no behavior change | `refactor/48-story-service` |
-| `test` | adding or fixing tests | `test/engine-conditions` |
-| `chore` | tooling, config, dependencies | `chore/eslint-config` |
-| `story` | story content (scenes, clues) | `story/61-chapter-3-blackout` |
+| Type       | Use for                         | Example                        |
+| ---------- | ------------------------------- | ------------------------------ |
+| `feat`     | new feature                     | `feat/42-notebook-page`        |
+| `fix`      | bug fix                         | `fix/57-clue-unlock-condition` |
+| `docs`     | documentation only              | `docs/architecture-update`     |
+| `refactor` | code change, no behavior change | `refactor/48-story-service`    |
+| `test`     | adding or fixing tests          | `test/engine-conditions`       |
+| `chore`    | tooling, config, dependencies   | `chore/eslint-config`          |
+| `story`    | story content (scenes, clues)   | `story/61-chapter-3-blackout`  |
 
 Rules:
+
 - Lowercase only (Git is case sensitive), hyphens between words.
 - One branch per issue. Split big issues into smaller ones.
 - Create the branch from the issue page, or locally from an up to date main, and include Closes #N in the PR
@@ -46,6 +47,7 @@ Use [Conventional Commits](https://www.conventionalcommits.org/):
 Scopes: `client`, `server`, `shared`, `story`, `ci`, `docs`.
 
 Examples:
+
 - `feat(server): add POST /story/choose endpoint`
 - `fix(client): stop double-submit on choice buttons`
 - `story(golden-watch): add chapter 3 blackout branches`
@@ -58,7 +60,6 @@ Examples:
 4. At least **2 approving reviews** from someone else before merging.
 5. Author resolves all review comments, then **merges** into `main`.
 6. Delete the branch after merging.
-
 
 ## Code conventions
 
