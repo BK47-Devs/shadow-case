@@ -1,0 +1,82 @@
+name: PR conventions
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+    branches: [dev, main]
+
+permissions:
+  contents: read
+
+env:
+    MSG_PATTERN: '^(feat|fix|docs|refactor|test|chore|story)\((client|server|shared|story|ci|docs|db|deps|config)\): .+'
+
+jobs:
+  branch-name:
+    name: Branch name
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check branch name
+        env:
+          BRANCH: ${{ github.head_ref }}
+        run: |
+          # issue number required
+          WITH_NUMBER='^(feat|fix|refactor|story|docs|test|chore)/[0-9]+-[a-z0-9]+(-[a-z0-9]+){1,3}$'
+          # issue number optional, only for docs, test and chore
+          WITHOUT_NUMBER='^(docs|test|chore)/[a-z][a-z0-9]*(-[a-z0-9]+){1,3}$'
+          if [[ "$BRANCH" =~ $WITH_NUMBER ]] || [[ "$BRANCH" =~ $WITHOUT_NUMBER ]]; then
+            echo "Branch name OK: $BRANCH"
+          else
+            echo "::error::Bad branch name: '$BRANCH'. Use type/issue-number-short-description (2 to 4 lowercase words). The number is optional only for docs, test and chore."
+            exit 1
+          fi
+
+  pr-title:
+    name: PR title
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check PR title
+        env:
+          TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          if [[ "$TITLE" =~ $MSG_PATTERN ]]; then
+            echo "PR title OK: $TITLE"
+          else
+            echo "::error::Bad PR title: '$TITLE'. Use type(scope): summary, e.g. chore(ci): add main ci workflow. Scopes: client, server, shared, story, ci, docs."
+            exit 1
+          fi
+
+  commit-messages:
+    name: Commit messages
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Check every commit message
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+          BRANCH: ${{ github.head_ref }}
+        run: |
+          # issue tag required only when the branch name has an issue number
+          PATTERN="$MSG_PATTERN"
+          if [[ "$BRANCH" =~ ^[a-z]+/[0-9]+- ]]; then
+            PATTERN="$MSG_PATTERN \(#[0-9]+\)\$"
+            echo "Branch has an issue number, so commits must end with (#N)"
+          fi
+          bad=0
+          while IFS= read -r msg; do
+            if [[ "$msg" =~ $PATTERN ]]; then
+              echo "OK: $msg"
+            elif [[ "$msg" == Revert\ \"* ]]; then
+              echo "OK (revert): $msg"
+            else
+              echo "::error::Bad commit message: '$msg'. Use type(scope): summary (#N)."
+              bad=1
+            fi
+          done < <(git log --no-merges --format=%s "$BASE..$HEAD")
+          exit $bad
