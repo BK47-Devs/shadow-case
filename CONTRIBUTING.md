@@ -41,16 +41,17 @@ Rules:
 Use [Conventional Commits](https://www.conventionalcommits.org/):
 
 ```
-<type>(<scope>): <short summary in present tense>
+<type>(<scope>): <short summary in present tense> (#<issue-number>)
 ```
+If the work has an issue, end the summary with the issue number: `(#N)`.
 
-Scopes: `client`, `server`, `shared`, `story`, `ci`, `docs`.
+Scopes: `client`, `server`, `shared`, `story`, `ci`, `docs`, `db`, `deps`, `config`.
 
 Examples:
 
-- `feat(server): add POST /story/choose endpoint`
-- `fix(client): stop double-submit on choice buttons`
-- `story(golden-watch): add chapter 3 blackout branches`
+- `feat(server): add POST /story/choose endpoint (#42)`
+- `fix(client): stop double-submit on choice buttons (#57)`
+- `story(golden-watch): add chapter 3 blackout branches (#61)`
 
 ## Pull requests
 
