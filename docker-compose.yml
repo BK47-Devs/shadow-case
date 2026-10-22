@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:17-alpine
+    ports:
+      - "197.0.0.1:5432:5432"
+    environment:
+      POSTGRES_DB : shadow_case
+      POSTGRES_USER : bk_47
+      POSTGRES_PASSWORD : f=bk_47
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
